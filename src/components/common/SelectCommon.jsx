@@ -39,7 +39,7 @@ const SelectCommon = ({
           <FormControl>
             <Select
               onValueChange={field.onChange}
-              defaultValue={field.value}
+              value={field.value}
               {...props}
             >
               <SelectTrigger className="w-full">

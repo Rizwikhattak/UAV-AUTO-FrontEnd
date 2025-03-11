@@ -23,17 +23,17 @@ const page = () => {
   return (
     <section className="view-drones-page flex justify-center">
       <div className="w-full px-10 py-5 space-y-5">
-        <div className="header flex flex-col items-center gap-y-2">
+        <div className="header flex flex-col items-center gap-y-4">
           <h1 className="font-medium text-3xl">Drones</h1>
           <p>Manage your drone fleet with Ease View and Edit Drone Details</p>
-          <div className="card relative  h-44 w-80 rounded-lg shadow-xl">
+          {/* <div className="card relative  h-44 w-80 rounded-lg shadow-xl bg-blue-950">
             <Image
-              src="/AddDrone.png"
+              src="/dashboard_drone.png"
               alt=""
               fill
-              className="object-cover w-72"
+              className="object-cover"
             />
-          </div>
+          </div> */}
         </div>
         <DataTableCommon
           columns={tableColumns}
