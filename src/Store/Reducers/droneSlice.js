@@ -22,12 +22,12 @@ const droneSlice = createSlice({
       .addCase(addDrone.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        toast("Drone Added");
+        toast.success("Drone Added");
       })
       .addCase(addDrone.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        toast("Unable to add drone");
+        toast.error("Unable to add drone");
       })
       .addCase(getAllDrones.pending, (state, action) => {
         state.loading = true;

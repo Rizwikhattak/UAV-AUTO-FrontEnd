@@ -18,7 +18,9 @@ import { fetchStations } from "@/Store/Actions/stationActions";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { addDrone } from "@/Store/Actions/droneActions";
+import Spinner from "@/components/common/SpinnerCommon";
 const Page = () => {
+  const drone = useSelector((state) => state.drone);
   const dispatch = useDispatch();
   const [inputImage, setInputImage] = useState(null);
   const station = useSelector((state) => state.station);
@@ -43,13 +45,18 @@ const Page = () => {
   }, [dispatch]);
   console.log("Stations", station);
 
-  const handleFormSubmit = (data) => {
-    console.log("Form Submitted:", data);
-    const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-    dispatch(addDrone(formData));
+  const handleFormSubmit = async (data) => {
+    try {
+      console.log("Form Submitted:", data);
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+      await dispatch(addDrone(formData)).unwrap();
+      form.reset();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleError = (errors) => {
@@ -115,8 +122,12 @@ const Page = () => {
                 placeholder="Please select a station"
               />
             )}
-            <Button type="submit" variant="hover-blue-full">
-              Add Operator
+            <Button
+              type="submit"
+              variant={drone.loading ? "outline-full" : "hover-blue-full"}
+              disabled={drone.loading}
+            >
+              {drone.loading ? <Spinner /> : "Add Drone"}
             </Button>
           </form>
         </Form>

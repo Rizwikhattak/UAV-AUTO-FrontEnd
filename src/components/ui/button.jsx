@@ -16,12 +16,14 @@ const buttonVariants = cva(
           " cursor-pointer bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
           " cursor-pointer border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        "outline-full":
+          " cursor-pointer border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground w-full",
         secondary:
           " cursor-pointer bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         "hover-blue-full":
-          "px-4 cursor-pointer  py-2 w-full bg-[var(--primary-custom)] border border-[var(--primary-custom)] rounded-md text-white transition-all duration-200 hover:bg-white hover:text-[var(--primary-custom)]",
+          "px-4 cursor-pointer  py-2 w-full bg-[var(--primary-custom)]  rounded-md text-white transition-all duration-200 hover:bg-white hover:ring hover:ring-[var(--primary-custom)] hover:text-[var(--primary-custom)]",
         "hover-blue-fit":
           "px-4 cursor-pointer  py-2 w-fit bg-[var(--primary-custom)] border border-[var(--primary-custom)] rounded-md text-white transition-all duration-200 hover:bg-white hover:text-[var(--primary-custom)]",
         "hover-outline-purple":

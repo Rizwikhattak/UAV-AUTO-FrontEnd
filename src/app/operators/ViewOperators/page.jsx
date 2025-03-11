@@ -3,24 +3,37 @@ import { DataTableColumnHeaderCommon } from "@/components/common/DataTableColumn
 import { DataTableCommon } from "@/components/common/DataTableCommon";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { getAllDrones } from "@/Store/Actions/droneActions";
+import { getAllOperators } from "@/Store/Actions/operatorActions";
+import { Delete } from "lucide-react";
+import { Trash2 } from "lucide-react";
+import { Edit } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 const page = () => {
   const dispatch = useDispatch();
-  const drone = useSelector((state) => state.drone);
-  console.log("DROOOONESSSSSSSSSs", drone);
+  const operator = useSelector((state) => state.operator);
+  console.log("DROOOONESSSSSSSSSs", operator);
   useEffect(() => {
-    dispatch(getAllDrones());
+    dispatch(getAllOperators());
   }, [dispatch]);
   return (
     <section className="view-drones-page flex justify-center">
       <div className="w-full px-10 py-5 space-y-5">
         <div className="header flex flex-col items-center gap-y-2">
-          <h1 className="font-medium text-3xl">Drones</h1>
-          <p>Manage your drone fleet with Ease View and Edit Drone Details</p>
+          <h1 className="font-medium text-3xl">Operators</h1>
+          <p>Manage your team, View all drone operators</p>
           <div className="card relative  h-44 w-80 rounded-lg shadow-xl">
             <Image
               src="/AddDrone.png"
@@ -32,7 +45,7 @@ const page = () => {
         </div>
         <DataTableCommon
           columns={tableColumns}
-          data={drone.data}
+          data={operator.data}
           className="w-full"
         />
       </div>
@@ -74,7 +87,7 @@ const tableColumns = [
         <div className="w-20 rounded-md">
           <img
             src={imgSrc}
-            alt="drone img"
+            alt="operator img"
             className="w-full h-full object-cover rounded-md"
           />
         </div>
@@ -92,33 +105,28 @@ const tableColumns = [
     },
   },
   {
-    accessorKey: "speed",
+    accessorKey: "email",
     header: ({ column }) => (
-      <DataTableColumnHeaderCommon column={column} title="Speed" />
+      <DataTableColumnHeaderCommon column={column} title="email" />
     ),
     cell: ({ row }) => {
-      const value = row.getValue("speed");
+      const value = row.getValue("email");
       return <span className=" ml-4 w-full">{value}</span>;
     },
   },
   {
-    accessorKey: "flight_duration",
-    header: ({ column }) => (
-      <DataTableColumnHeaderCommon column={column} title="Flight Duration" />
-    ),
+    id: "actions",
+    header: "Actions",
+    enableHiding: false,
     cell: ({ row }) => {
-      const value = row.getValue("flight_duration");
-      return <span className=" ml-4 w-full">{value}</span>;
-    },
-  },
-  {
-    accessorKey: "ceiling",
-    header: ({ column }) => (
-      <DataTableColumnHeaderCommon column={column} title="Ceiling" />
-    ),
-    cell: ({ row }) => {
-      const value = row.getValue("ceiling");
-      return <span className=" ml-4 w-full">{value}</span>;
+      const payment = row.original;
+      return (
+        <div className="flex items-center gap-3">
+        
+          <Edit className="hover:stroke-blue-500 w-4 h-4 cursor-pointer transition-all duration-100 ease-in-out" />
+          <Trash2 className="hover:stroke-red-500 w-4 h-4 cursor-pointer transition-all duration-100 ease-in-out" />
+        </div>
+      );
     },
   },
 ];

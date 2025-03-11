@@ -29,5 +29,6 @@ export const ApiCommon = async (
   } catch (error) {
     console.log(ERROR_MESSAGE);
     console.log(error);
+    throw error;
   }
 };
