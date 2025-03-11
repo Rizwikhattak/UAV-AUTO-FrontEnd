@@ -37,3 +37,41 @@ export const getAllOperators = createAsyncThunk(
     }
   }
 );
+
+export const updateOperator = createAsyncThunk(
+  "operator/UpdateOperator",
+  async (data, { rejectWithValue }) => {
+    try {
+      const operatorData = await ApiCommon(
+        "put",
+        "form",
+        `update_operator_by_id/${data.get("id")}`,
+        "Error updating operator",
+        data
+      );
+      return operatorData;
+    } catch (err) {
+      console.log("Rejected statr 1");
+      return rejectWithValue(err?.message || "Error updating operator");
+    }
+  }
+);
+
+export const deleteOperator = createAsyncThunk(
+  "operator/DeleteOperator",
+  async (id, { rejectWithValue }) => {
+    try {
+      console.log("IDDD", id);
+      const operatorData = await ApiCommon(
+        "delete",
+        "json",
+        `delete_operator_by_id/${id}`,
+        "Error deleting operator",
+        null
+      );
+      return operatorData;
+    } catch (err) {
+      return rejectWithValue(err?.message || "Error deleting operator");
+    }
+  }
+);

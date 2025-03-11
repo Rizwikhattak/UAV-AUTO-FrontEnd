@@ -3,7 +3,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ApiCommon } from "@/utils/ApiCommon";
 
-export const fetchStations = createAsyncThunk(
+export const getAllStations = createAsyncThunk(
   "station/fetchStations",
   async (_, { rejectWithValue }) => {
     try {

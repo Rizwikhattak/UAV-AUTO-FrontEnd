@@ -24,15 +24,15 @@ const Page = () => {
 
   const initialState = {
     name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    image: "",
+    location: "",
+    lat: 0,
+    long: 0,
   };
 
   const form = useForm({
     resolver: zodResolver(addOperatorSchema),
     defaultValues: initialState,
+    mode: "onChange",
   });
 
   const handleFormSubmit = async (data) => {

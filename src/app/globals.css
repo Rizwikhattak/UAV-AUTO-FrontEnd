@@ -25,7 +25,25 @@ input:-webkit-autofill {
   color: black !important;
   box-shadow: 0 0 0px 1000px var(--background-color) inset !important;
 }
+::-webkit-scrollbar {
+  width: 4px; /* Width of the scrollbar */
+  height: 4px;
+  padding: 10rem;
+}
 
+::-webkit-scrollbar-track {
+  background: #e0e3e5; /* Track color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b7b8ba; /* Scrollbar thumb color */
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: gray; /* Color on hover */
+}
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

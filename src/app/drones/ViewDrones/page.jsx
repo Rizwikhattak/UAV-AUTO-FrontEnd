@@ -1,9 +1,13 @@
 "use client";
 import { DataTableColumnHeaderCommon } from "@/components/common/DataTableColumnHeader";
 import { DataTableCommon } from "@/components/common/DataTableCommon";
+import { DeleteDroneDialog } from "@/components/drone/DeleteDroneDialog";
+import { EditDroneSheet } from "@/components/drone/EditDroneSheet";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getAllDrones } from "@/Store/Actions/droneActions";
+import { Trash2 } from "lucide-react";
+import { Edit } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -15,6 +19,7 @@ const page = () => {
   useEffect(() => {
     dispatch(getAllDrones());
   }, [dispatch]);
+
   return (
     <section className="view-drones-page flex justify-center">
       <div className="w-full px-10 py-5 space-y-5">
@@ -68,7 +73,7 @@ const tableColumns = [
     cell: ({ row }) => {
       const imgSrc =
         //eslint-disable-next-line no-undef
-        process.env.NEXT_PUBLIC_BASE_URL + row.getValue("image_path");
+        process.env.NEXT_PUBLIC_BASE_URL + row.getValue("image_path")?.slice(2);
       console.log("Image src", imgSrc);
       return (
         <div className="w-20 rounded-md">
@@ -119,6 +124,37 @@ const tableColumns = [
     cell: ({ row }) => {
       const value = row.getValue("ceiling");
       return <span className=" ml-4 w-full">{value}</span>;
+    },
+  },
+  {
+    id: "actions",
+    header: "Actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const rowData = {
+        ...row.original,
+        ceiling: String(row.original.ceiling),
+        flight_duration: String(row.original.flight_duration),
+        fps: String(row.original.fps),
+        speed: String(row.original.speed),
+        station_id: String(row.original.station_id),
+        image_path: `${
+          //eslint-disable-next-line no-undef
+          process.env.NEXT_PUBLIC_BASE_URL
+        }${row.original.image_path?.slice(2)}`,
+      };
+      console.log("Droneeeee Dataaa", rowData);
+      return (
+        <div className="flex items-center gap-3">
+          {/* <EditDialogOperator
+            triggerButton={
+              <Edit className="hover:stroke-blue-500 w-4 h-4 cursor-pointer transition-all duration-100 ease-in-out" />
+            }
+          /> */}
+          <EditDroneSheet triggerButton={<Edit />} droneData={rowData} />
+          <DeleteDroneDialog triggerButton={<Trash2 />} droneData={rowData} />
+        </div>
+      );
     },
   },
 ];

@@ -14,7 +14,7 @@ import "../../globals.css";
 import SelectCommon from "@/components/common/SelectCommon";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { fetchStations } from "@/Store/Actions/stationActions";
+import { getAllStations } from "@/Store/Actions/stationActions";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { addDrone } from "@/Store/Actions/droneActions";
@@ -41,7 +41,7 @@ const Page = () => {
   });
 
   useEffect(() => {
-    dispatch(fetchStations());
+    dispatch(getAllStations());
   }, [dispatch]);
   console.log("Stations", station);
 

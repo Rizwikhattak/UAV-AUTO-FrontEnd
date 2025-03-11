@@ -1,6 +1,7 @@
 import { addOperatorSchema } from "@/app/operators/OperatorsSchema";
 import CardInputCommon from "@/components/common/CardInputCommon";
 import InputCommon from "@/components/common/InputCommon";
+import Spinner from "@/components/common/SpinnerCommon";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -15,7 +16,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { addOperator } from "@/Store/Actions/operatorActions";
+import { addOperator, updateOperator } from "@/Store/Actions/operatorActions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -23,16 +24,16 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 
-export function EditOperatorSheet({ triggerButton, data }) {
+export function EditOperatorSheet({ triggerButton, opData }) {
   const operator = useSelector((state) => state.operator);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const initialState = {
-    name: data.name,
-    email: data.email,
-    password: data.password,
-    confirmPassword: data.confirmPassword,
-    image: data.image_path,
+    name: opData.name,
+    email: opData.email,
+    password: "",
+    confirmPassword: "",
+    image: opData.image_path,
   };
 
   const form = useForm({
@@ -48,7 +49,11 @@ export function EditOperatorSheet({ triggerButton, data }) {
         formData.append(key, value);
       });
       formData.append("role", "operator");
-      await dispatch(addOperator(formData)).unwrap();
+      formData.append("id", opData.id);
+      formData.append("user_id", opData.user_id);
+      console.log("opData", opData);
+      console.log("form data", formData);
+      await dispatch(updateOperator(formData)).unwrap();
       form.reset();
     } catch (err) {
       console.log(err);
@@ -130,7 +135,7 @@ export function EditOperatorSheet({ triggerButton, data }) {
                     operator.loading ? "outline-full" : "hover-blue-full"
                   }
                 >
-                  {operator.loading ? <Spinner /> : "Add Operator"}
+                  {operator.loading ? <Spinner /> : "Update Operator"}
                 </Button>
               </SheetClose>
             </SheetFooter>

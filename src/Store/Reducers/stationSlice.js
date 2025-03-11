@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchStations } from "@/Store/Actions/stationActions";
+import { getAllStations } from "@/Store/Actions/stationActions";
 import { toast } from "sonner";
 
 const initialState = {
@@ -16,15 +16,15 @@ export const stationSlice = createSlice({
   reducers: {}, // Removed `getAllStations` because it was unused
   extraReducers: (builder) => {
     builder
-      .addCase(fetchStations.pending, (state) => {
+      .addCase(getAllStations.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchStations.fulfilled, (state, action) => {
+      .addCase(getAllStations.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload.data; // ✅ Corrected from `.push()`
       })
-      .addCase(fetchStations.rejected, (state, action) => {
+      .addCase(getAllStations.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

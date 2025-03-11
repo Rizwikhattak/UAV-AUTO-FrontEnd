@@ -37,7 +37,7 @@ const InputCommon = ({
                 {inputType === "password" ? (
                   <InputPassword
                     placeholder={placeholder}
-                    value={field.value ?? ""}
+                    value={String(field.value) ?? ""}
                     type={inputType}
                     {...field}
                     {...props}
@@ -45,7 +45,7 @@ const InputCommon = ({
                 ) : (
                   <Input
                     type={inputType}
-                    value={field.value ?? ""}
+                    value={String(field.value) ?? ""}
                     placeholder={placeholder}
                     {...field}
                   />

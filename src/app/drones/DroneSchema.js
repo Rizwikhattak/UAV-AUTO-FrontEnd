@@ -21,9 +21,24 @@ export const addDroneSchema = z.object({
 
   station_id: z.string().min(1, { message: "Please select a station." }),
 
-  image: z.custom((file) => file instanceof File, {
-    message: "Please upload a valid image file.",
-  }),
+  image: z.custom(
+    (val) => {
+      // If empty or not provided, that's okay (optional).
+      if (!val) return true;
+
+      // If it's a File
+      if (val instanceof File) return true;
+
+      // If it's a string (existing image URL)
+      if (typeof val === "string") return true;
+
+      return false;
+    },
+    {
+      message:
+        "Please upload a valid image file or provide an existing image URL.",
+    }
+  ),
   // .refine((file) => file && file.size <= 2 * 1024 * 1024, {
   //   message: "Image size must be less than 2MB.",
   // })

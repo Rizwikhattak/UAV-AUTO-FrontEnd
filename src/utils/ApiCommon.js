@@ -17,6 +17,17 @@ export const ApiCommon = async (
             : await axiosJSON.post(URL, DATA);
         return response.data;
       }
+      case "put": {
+        const response =
+          type === "form"
+            ? await axiosForm.put(URL, DATA)
+            : await axiosJSON.put(URL, DATA);
+        return response.data;
+      }
+      case "delete": {
+        const response = await axiosJSON.delete(URL);
+        return response.data;
+      }
       case "getAll": {
         const response = await axiosJSON.get(URL);
         return response.data;

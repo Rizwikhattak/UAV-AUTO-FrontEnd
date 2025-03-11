@@ -1,8 +1,9 @@
 "use client";
 import { DataTableColumnHeaderCommon } from "@/components/common/DataTableColumnHeader";
 import { DataTableCommon } from "@/components/common/DataTableCommon";
-import { EditDialogOperator } from "@/components/common/EditDialogOperator";
-import { EditOperatorSheet } from "@/components/common/EditOperatorSheet";
+import { DeleteOperatorDialog } from "@/components/operator/DeleteOperatorDialog";
+import { EditDialogOperator } from "@/components/operator/EditDialogOperator";
+import { EditOperatorSheet } from "@/components/operator/EditOperatorSheet";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -84,7 +85,7 @@ const tableColumns = [
     cell: ({ row }) => {
       const imgSrc =
         //eslint-disable-next-line no-undef
-        process.env.NEXT_PUBLIC_BASE_URL + row.getValue("image_path");
+        process.env.NEXT_PUBLIC_BASE_URL + row.getValue("image_path").slice(2);
       console.log("Image src", imgSrc);
       return (
         <div className="w-20 rounded-md">
@@ -129,7 +130,7 @@ const tableColumns = [
           process.env.NEXT_PUBLIC_BASE_URL
         }${row.original.image_path.slice(2)}`,
       };
-
+      console.log("Row Dataaa", rowData);
       return (
         <div className="flex items-center gap-3">
           {/* <EditDialogOperator
@@ -137,8 +138,8 @@ const tableColumns = [
               <Edit className="hover:stroke-blue-500 w-4 h-4 cursor-pointer transition-all duration-100 ease-in-out" />
             }
           /> */}
-          <EditOperatorSheet triggerButton={<Edit />} data={rowData} />
-          <Trash2 className="hover:stroke-red-500 w-4 h-4 cursor-pointer transition-all duration-100 ease-in-out" />
+          <EditOperatorSheet triggerButton={<Edit />} opData={rowData} />
+          <DeleteOperatorDialog triggerButton={<Trash2 />} opData={rowData} />
         </div>
       );
     },

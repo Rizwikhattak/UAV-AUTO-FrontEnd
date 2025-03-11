@@ -1,5 +1,10 @@
 "use client";
-import { addDrone, getAllDrones } from "@/Store/Actions/droneActions";
+import {
+  addDrone,
+  deleteDrone,
+  getAllDrones,
+  updateDrone,
+} from "@/Store/Actions/droneActions";
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "sonner";
 
@@ -42,7 +47,39 @@ const droneSlice = createSlice({
       .addCase(getAllDrones.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+      .addCase(updateDrone.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateDrone.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        const index = state.data.findIndex(
+          (drone) => drone.id === action.payload.data.id
+        );
+        if (index !== -1) state.data[index] = action.payload.data;
+      })
+      .addCase(updateDrone.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteDrone.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteDrone.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.data = state.data.filter(
+          (drone) => drone.id !== action.payload.data.id
+        );
+      })
+      .addCase(deleteDrone.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      ;
   },
 });
 

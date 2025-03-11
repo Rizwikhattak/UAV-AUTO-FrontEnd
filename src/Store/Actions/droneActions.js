@@ -38,3 +38,37 @@ export const getAllDrones = createAsyncThunk(
     }
   }
 );
+export const updateDrone = createAsyncThunk(
+  "drones/UpdateDrone",
+  async (data, { rejectWithValue }) => {
+    try {
+      const droneData = await ApiCommon(
+        "put",
+        "form",
+        `update_drone_by_id/${data.get("id")}`,
+        "Error updating drone",
+        data
+      );
+      return droneData;
+    } catch (error) {
+      rejectWithValue(error?.message || "Error updating drone");
+    }
+  }
+);
+export const deleteDrone = createAsyncThunk(
+  "drones/DeleteDrone",
+  async (id, { rejectWithValue }) => {
+    try {
+      const droneData = await ApiCommon(
+        "delete",
+        "form",
+        `delete_drone_by_id/${id}`,
+        "Error deleting drone",
+        null
+      );
+      return droneData;
+    } catch (error) {
+      rejectWithValue(error?.message || "Error deleting drone");
+    }
+  }
+);
