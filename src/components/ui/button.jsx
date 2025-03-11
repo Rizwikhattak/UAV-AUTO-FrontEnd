@@ -20,7 +20,7 @@ const buttonVariants = cva(
           " cursor-pointer border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground w-full",
         secondary:
           " cursor-pointer bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: "hover:bg-accent hover:text-accent-foreground cursor-pointer",
         link: "text-primary underline-offset-4 hover:underline",
         "hover-blue-full":
           "px-4 cursor-pointer  py-2 w-full bg-[var(--primary-custom)]  rounded-md text-white transition-all duration-200 hover:bg-white hover:ring hover:ring-[var(--primary-custom)] hover:text-[var(--primary-custom)]",

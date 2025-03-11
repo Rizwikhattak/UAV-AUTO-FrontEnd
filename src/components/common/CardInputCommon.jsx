@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useFormContext } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormMessage } from "../ui/form";
 import { Card, CardContent } from "../ui/card";
@@ -9,7 +9,7 @@ import { Plus } from "lucide-react";
 const CardInputCommon = ({ name = "image", control }) => {
   const { setValue, watch } = useFormContext();
   const imageValue = watch(name);
-
+  console.log("Image Value", imageValue);
   const openFilePicker = () => {
     document.getElementById(name).click();
   };
@@ -21,11 +21,37 @@ const CardInputCommon = ({ name = "image", control }) => {
     }
   };
 
+  // Helper to render the appropriate image
+  const renderImage = () => {
+    // 1. If the user selected a File:
+    if (imageValue instanceof File) {
+      return (
+        <img
+          src={URL.createObjectURL(imageValue)}
+          alt="Selected"
+          className="h-full w-full object-cover rounded-md"
+        />
+      );
+    }
+    // 2. If imageValue is a string (existing URL from server)
+    if (typeof imageValue === "string" && imageValue.length > 0) {
+      return (
+        <img
+          src={imageValue}
+          alt="Existing"
+          className="h-full w-full object-cover rounded-md"
+        />
+      );
+    }
+    // 3. Fallback (no image)
+    return <Plus className="text-gray-500" />;
+  };
+
   return (
     <FormField
       control={control}
       name={name}
-      render={({ field }) => (
+      render={() => (
         <FormItem className="image-input flex flex-col items-center justify-center">
           <FormControl>
             <div>
@@ -42,15 +68,7 @@ const CardInputCommon = ({ name = "image", control }) => {
                 onClick={openFilePicker}
               >
                 <CardContent className="h-40 flex items-center justify-center !p-0">
-                  {imageValue instanceof File ? (
-                    <img
-                      src={URL.createObjectURL(imageValue)}
-                      alt="Selected"
-                      className="h-full w-full object-cover rounded-md"
-                    />
-                  ) : (
-                    <Plus className="text-gray-500" />
-                  )}
+                  {renderImage()}
                 </CardContent>
               </Card>
             </div>

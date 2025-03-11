@@ -1,6 +1,8 @@
 "use client";
 import { DataTableColumnHeaderCommon } from "@/components/common/DataTableColumnHeader";
 import { DataTableCommon } from "@/components/common/DataTableCommon";
+import { EditDialogOperator } from "@/components/common/EditDialogOperator";
+import { EditOperatorSheet } from "@/components/common/EditOperatorSheet";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -43,6 +45,7 @@ const page = () => {
             />
           </div>
         </div>
+
         <DataTableCommon
           columns={tableColumns}
           data={operator.data}
@@ -119,11 +122,22 @@ const tableColumns = [
     header: "Actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const rowData = {
+        ...row.original,
+        image_path: `${
+          //eslint-disable-next-line no-undef
+          process.env.NEXT_PUBLIC_BASE_URL
+        }${row.original.image_path.slice(2)}`,
+      };
+
       return (
         <div className="flex items-center gap-3">
-        
-          <Edit className="hover:stroke-blue-500 w-4 h-4 cursor-pointer transition-all duration-100 ease-in-out" />
+          {/* <EditDialogOperator
+            triggerButton={
+              <Edit className="hover:stroke-blue-500 w-4 h-4 cursor-pointer transition-all duration-100 ease-in-out" />
+            }
+          /> */}
+          <EditOperatorSheet triggerButton={<Edit />} data={rowData} />
           <Trash2 className="hover:stroke-red-500 w-4 h-4 cursor-pointer transition-all duration-100 ease-in-out" />
         </div>
       );
