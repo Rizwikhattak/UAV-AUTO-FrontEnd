@@ -29,7 +29,7 @@ const CardInputCommon = ({ name = "image", control }) => {
         <img
           src={URL.createObjectURL(imageValue)}
           alt="Selected"
-          className="h-full w-full object-cover rounded-md"
+          className="h-full w-full object-fit rounded-md"
         />
       );
     }
@@ -39,7 +39,7 @@ const CardInputCommon = ({ name = "image", control }) => {
         <img
           src={imageValue}
           alt="Existing"
-          className="h-full w-full object-cover rounded-md"
+          className="h-full w-full object-fit rounded-md"
         />
       );
     }
@@ -67,7 +67,7 @@ const CardInputCommon = ({ name = "image", control }) => {
                 className="cursor-pointer w-72 flex items-center justify-center hover:bg-gray-200 transition-all ease-in-out shadow-lg !p-0"
                 onClick={openFilePicker}
               >
-                <CardContent className="h-40 flex items-center justify-center !p-0">
+                <CardContent className="h-40 flex items-center justify-center w-full !p-0">
                   {renderImage()}
                 </CardContent>
               </Card>

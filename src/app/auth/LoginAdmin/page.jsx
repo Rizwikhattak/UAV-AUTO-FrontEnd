@@ -1,10 +1,10 @@
-import ViewOperators from "@/views/operators/ViewOperators";
+import LoginAdmin from "@/views/auth/LoginAdmin";
 import React from "react";
 
 const page = () => {
   return (
     <>
-      <ViewOperators />
+      <LoginAdmin />
     </>
   );
 };

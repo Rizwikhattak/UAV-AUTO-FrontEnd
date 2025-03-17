@@ -1,41 +1,36 @@
+"use client";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useDispatch } from "react-redux";
+import { toast } from "sonner";
+import { addOperator } from "@/Store/Actions/operatorActions";
 import { addOperatorSchema } from "@/views/operators/OperatorsSchema";
+import { useSelector } from "react-redux";
+import Spinner from "@/components/common/SpinnerCommon";
+import { Form } from "@/components/ui/form";
 import CardInputCommon from "@/components/common/CardInputCommon";
 import InputCommon from "@/components/common/InputCommon";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { addOperator } from "@/Store/Actions/operatorActions";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { toast } from "sonner";
 
-export function EditDialogOperator({ triggerButton }) {
+const AddOperators = () => {
   const operator = useSelector((state) => state.operator);
   const dispatch = useDispatch();
+  const [inputImage, setInputImage] = useState(null);
+
   const initialState = {
     name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    image: "",
+    location: "",
+    lat: 0,
+    long: 0,
   };
 
   const form = useForm({
     resolver: zodResolver(addOperatorSchema),
     defaultValues: initialState,
+    mode: "onChange",
   });
+
   const handleFormSubmit = async (data) => {
     try {
       console.log("Form Submitted:", data);
@@ -56,18 +51,14 @@ export function EditDialogOperator({ triggerButton }) {
     console.log("Validation Errors:", errors);
     toast.error("Please fix the errors before submitting.");
   };
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">{triggerButton}</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
-        </DialogHeader>
+    <div className="flex justify-center p-10 bg-[--color-avocado-100]">
+      <div className="flex flex-col w-[70%] gap-4">
+        <div className="content-header text-center">
+          <h1 className="text-xl font-bold">Add New Operator</h1>
+          <p>Register an operator to manage drone operations efficiently</p>
+        </div>
         <Form {...form} className="w-full">
           <form
             onSubmit={form.handleSubmit(handleFormSubmit, handleError)}
@@ -120,10 +111,9 @@ export function EditDialogOperator({ triggerButton }) {
             </Button>
           </form>
         </Form>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
-}
+};
+
+export default AddOperators;

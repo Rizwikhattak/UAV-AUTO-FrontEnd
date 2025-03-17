@@ -1,10 +1,10 @@
-import ViewOperators from "@/views/operators/ViewOperators";
+import ViewMissionPlans from "@/views/planmissions/ViewMissionPlans";
 import React from "react";
 
 const page = () => {
   return (
     <>
-      <ViewOperators />
+      <ViewMissionPlans />
     </>
   );
 };

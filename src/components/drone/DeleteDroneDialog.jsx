@@ -1,4 +1,4 @@
-import { addOperatorSchema } from "@/app/operators/OperatorsSchema";
+import { addOperatorSchema } from "@/views/operators/OperatorsSchema";
 import CardInputCommon from "@/components/common/CardInputCommon";
 import InputCommon from "@/components/common/InputCommon";
 import { Button } from "@/components/ui/button";

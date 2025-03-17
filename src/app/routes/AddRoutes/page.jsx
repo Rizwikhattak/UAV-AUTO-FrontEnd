@@ -1,10 +1,10 @@
-import ViewOperators from "@/views/operators/ViewOperators";
+import AddRoutes from "@/views/routes/AddRoutes";
 import React from "react";
 
 const page = () => {
   return (
     <>
-      <ViewOperators />
+      <AddRoutes />
     </>
   );
 };

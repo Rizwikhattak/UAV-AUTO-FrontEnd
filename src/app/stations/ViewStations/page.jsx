@@ -1,9 +1,12 @@
-import React from 'react'
+import ViewStations from "@/views/stations/ViewStations";
+import React from "react";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <>
+      <ViewStations />
+    </>
+  );
+};
 
-export default page
+export default page;

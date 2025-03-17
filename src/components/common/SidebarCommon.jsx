@@ -48,13 +48,28 @@ const items = [
     icon: "/ViewOperator.png",
   },
   {
+    title: "Add Routes",
+    url: "/routes/AddRoutes",
+    icon: "/AddRoutes.png",
+  },
+  {
+    title: "View Routes",
+    url: "/routes/ViewRoutes",
+    icon: "/ViewRoutes.png",
+  },
+  {
     title: "Plan Mission",
     url: "/planMissions/AddMissionPlan",
     icon: "/PlanMission.png",
   },
   {
+    title: "View Missions",
+    url: "/planMissions/ViewMissionPlans",
+    icon: "/ViewMissions.png",
+  },
+  {
     title: "History",
-    url: "/history/ViewAllHistory",
+    url: "/history",
     icon: "/History.png",
   },
 ];
@@ -85,7 +100,7 @@ export function SidebarCommon() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Pages</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="!gap-y-4">
               {items.map((item) => (

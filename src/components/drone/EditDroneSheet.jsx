@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "sonner";
 
 import { updateDrone } from "@/Store/Actions/droneActions"; // <-- Replace with your actual action
-import { addDroneSchema } from "@/app/drones/DroneSchema"; // <-- Replace with your actual Zod schema
+import { addDroneSchema } from "@/views/drones/DroneSchema"; // <-- Replace with your actual Zod schema
 
 import CardInputCommon from "@/components/common/CardInputCommon";
 import InputCommon from "@/components/common/InputCommon";

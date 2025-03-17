@@ -47,7 +47,7 @@ input:-webkit-autofill {
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --primary-custom: #1976d2;
+  --primary-custom: #0044ff;
 }
 
 :root {

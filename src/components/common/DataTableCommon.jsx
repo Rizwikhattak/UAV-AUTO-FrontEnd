@@ -54,7 +54,7 @@ export function DataTableCommon({ columns, data }) {
     },
   });
   return (
-    <div>
+    <div className=" overflow-x-hidden">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter Drones..."
@@ -69,7 +69,7 @@ export function DataTableCommon({ columns, data }) {
         />
         <DataTableViewOptions table={table} />
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-x-auto w-full">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

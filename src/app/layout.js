@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
+          {/* <div className="w-screen h-screen">{children}</div> */}
           <SidebarLayout>{children}</SidebarLayout>
         </ReduxProvider>
       </body>
